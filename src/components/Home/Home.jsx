@@ -12,8 +12,10 @@ const Home = () => {
 
   const fetchPopularMovies = () => {
     getPopularMovies().then((res) => {
+      setIsDataLoaded(true);
       if (!res) return;
-      console.log(res);
+      setTotalPages(res.total_pages);
+      setPopularMovies(res.result);
     });
   };
 
@@ -22,6 +24,11 @@ const Home = () => {
   }, []);
   return (
     <div>
+      {!isDataLoaded ? (
+        "Loading................"
+      ) : (
+        <div className={styles.innerContainer} />
+      )}
       <Paginate onIntersection={(isOnEnd) => setIsNearEnd(isOnEnd)}></Paginate>
     </div>
   );
