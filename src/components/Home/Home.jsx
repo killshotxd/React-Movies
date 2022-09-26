@@ -11,18 +11,33 @@ const Home = () => {
   const [isMoreMoviesLoading, setIsMoreMoviesLoading] = useState(false);
   const [isNearEnd, setIsNearEnd] = useState(false);
 
-  const fetchPopularMovies = () => {
-    getPopularMovies().then((res) => {
+  const fetchPopularMovies = (page) => {
+    getPopularMovies(page).then((res) => {
       setIsDataLoaded(true);
       if (!res) return;
-      setTotalPages(res.total_pages);
-      setPopularMovies(res.results);
+      if (page === 1) {
+        setTotalPages(res.total_pages);
+        setPopularMovies(res.results);
+      } else {
+        setPopularMovies((prev) => [...prev, ...res?.results]);
+      }
+      setCurrentPage(res?.page);
     });
   };
 
+  const handlePaginate = () => {
+    if (isMoreMoviesLoading || currentPage >= totalPages) return;
+    fetchPopularMovies(currentPage + 1);
+  };
+
   useEffect(() => {
-    fetchPopularMovies();
+    fetchPopularMovies(1);
   }, []);
+
+  useEffect(() => {
+    if (isNearEnd) handlePaginate();
+  }, [isNearEnd]);
+
   return (
     <div>
       {!isDataLoaded ? (
@@ -30,7 +45,7 @@ const Home = () => {
       ) : (
         <div className={styles.innerContainer} />
       )}
-      <Paginate onEnd={() => console.log("Near End")}>
+      <Paginate onIntersection={(isOnEnd) => setIsNearEnd(isOnEnd)}>
         {popularMovies.map((item) => {
           <MovieCard movie={item} key={item.id} />;
         })}

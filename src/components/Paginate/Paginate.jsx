@@ -9,7 +9,6 @@ function Paginate(props) {
 
     const observer = new IntersectionObserver((data) => {
       const isIntersecting = data[0].isIntersecting;
-
       if (props.onIntersection) props.onIntersection(isIntersecting);
     });
 
