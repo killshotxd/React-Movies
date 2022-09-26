@@ -41,17 +41,20 @@ const Home = () => {
   }, [isNearEnd]);
 
   return (
-    <div>
+    <div className={styles.container}>
       {!isDataLoaded ? (
-        "Loading................"
+        "Loading..."
       ) : (
-        <div className={styles.innerContainer} />
+        <Paginate onIntersection={(isOnEnd) => setIsNearEnd(isOnEnd)}>
+          <div className={styles.title}>Popular movies</div>
+          <div className={styles.innerContainer}>
+            {popularMovies.map((item, index) => (
+              <MovieCard movie={item} key={item.id + index + ""} />
+            ))}
+            {isMoreMoviesLoading && <b>Loading...</b>}
+          </div>
+        </Paginate>
       )}
-      <Paginate onIntersection={(isOnEnd) => setIsNearEnd(isOnEnd)}>
-        {popularMovies.map((item, index) => {
-          <MovieCard movie={item} key={item.id + index + ""} />;
-        })}
-      </Paginate>
     </div>
   );
 };
