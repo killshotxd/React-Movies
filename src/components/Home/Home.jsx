@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Paginate from "../Paginate/Paginate";
 import styles from "./Home.module.css";
 import { getPopularMovies } from "../../api/movies";
+import MovieCard from "../MovieCard/MovieCard";
 const Home = () => {
   const [popularMovies, setPopularMovies] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
@@ -15,7 +16,7 @@ const Home = () => {
       setIsDataLoaded(true);
       if (!res) return;
       setTotalPages(res.total_pages);
-      setPopularMovies(res.result);
+      setPopularMovies(res.results);
     });
   };
 
@@ -29,7 +30,11 @@ const Home = () => {
       ) : (
         <div className={styles.innerContainer} />
       )}
-      <Paginate onIntersection={(isOnEnd) => setIsNearEnd(isOnEnd)}></Paginate>
+      <Paginate onEnd={() => console.log("Near End")}>
+        {popularMovies.map((item) => {
+          <MovieCard movie={item} key={item.id} />;
+        })}
+      </Paginate>
     </div>
   );
 };
