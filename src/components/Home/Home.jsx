@@ -12,7 +12,9 @@ const Home = () => {
   const [isNearEnd, setIsNearEnd] = useState(false);
 
   const fetchPopularMovies = (page) => {
+    setIsMoreMoviesLoading(true);
     getPopularMovies(page).then((res) => {
+      setIsMoreMoviesLoading(false);
       setIsDataLoaded(true);
       if (!res) return;
       if (page === 1) {
