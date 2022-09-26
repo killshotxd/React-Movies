@@ -46,8 +46,8 @@ const Home = () => {
         <div className={styles.innerContainer} />
       )}
       <Paginate onIntersection={(isOnEnd) => setIsNearEnd(isOnEnd)}>
-        {popularMovies.map((item) => {
-          <MovieCard movie={item} key={item.id} />;
+        {popularMovies.map((item, index) => {
+          <MovieCard movie={item} key={item.id + index + ""} />;
         })}
       </Paginate>
     </div>
