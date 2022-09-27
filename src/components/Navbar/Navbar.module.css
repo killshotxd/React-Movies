@@ -65,6 +65,9 @@
 .link a {
   text-decoration: none;
   color: white;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .link:hover a {

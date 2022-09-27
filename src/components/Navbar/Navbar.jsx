@@ -1,5 +1,5 @@
 import React from "react";
-import { GitHub, Search } from "react-feather";
+import { Chrome, GitHub, Search } from "react-feather";
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
 
@@ -21,7 +21,9 @@ const Navbar = () => {
         </div> */}
 
         <p className={styles.link}>
-          <Link to="/explore">Explore</Link>
+          <Link to="/explore">
+            Explore <Chrome />
+          </Link>
         </p>
       </div>
     </div>
