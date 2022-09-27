@@ -20,5 +20,3 @@ function MovieCard(props) {
 }
 
 export default MovieCard;
-
-// part 2 24:19m
