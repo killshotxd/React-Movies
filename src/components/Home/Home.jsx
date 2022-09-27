@@ -60,6 +60,3 @@ const Home = () => {
 };
 
 export default Home;
-
-// Part 3
-//12m
