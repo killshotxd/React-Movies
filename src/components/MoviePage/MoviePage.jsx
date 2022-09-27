@@ -1,25 +1,60 @@
 import React from "react";
+import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getMovieDetails } from "../../api/movies";
+import { getMovieDetails, getSimilarMovies } from "../../api/movies";
+import MovieCard from "../MovieCard/MovieCard";
 import styles from "./MoviePage.module.css";
 const MoviePage = () => {
+  const imagePrefixUrl = "http://image.tmdb.org/t/p/w500";
   const params = useParams();
 
+  const [movie, setMovie] = useState({});
+  const [similarMovies, setSimilarMovies] = useState([]);
   const movieId = params.movieId;
 
   const fetchMovieDetails = () => {
     getMovieDetails(movieId).then((res) => {
       if (!res) return;
-      console.log(res);
+      setMovie(res);
+    });
+  };
+  const fetchSimilarMovies = () => {
+    getSimilarMovies(movieId).then((res) => {
+      if (!res) return;
+      setSimilarMovies(res.results);
     });
   };
 
   useEffect(() => {
     fetchMovieDetails();
+    fetchSimilarMovies();
   });
 
-  return <div>MoviePage</div>;
+  return (
+    <div className={styles.container}>
+      <div className={styles.main}>
+        <img src={`${imagePrefixUrl}${movie?.backdrop_path}`} />
+        <div className={styles.details}>
+          <label>Title</label>
+          <div className={styles.title}>{movie?.title}</div>
+          <div className={styles.sub}>{movie?.tagline}</div>
+          <label>Story</label>
+          <div className={styles.desc}>{movie?.overview}</div>
+          <label>Run time</label>
+          <div className={styles.desc}>{movie?.runtime} mins</div>
+        </div>
+      </div>
+      <div className={styles.similar}>
+        <div className={styles.title}>Similar movies</div>
+        <div className={styles.movies}>
+          {similarMovies.map((item) => (
+            <MovieCard movie={item} key={item.id} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default MoviePage;
