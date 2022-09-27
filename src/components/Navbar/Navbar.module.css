@@ -15,8 +15,15 @@
 .logo {
   font-weight: bold;
   font-size: 1.8rem;
-  color: aliceblue;
+  color: #eec5c5;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo svg:hover {
+  color: white;
 }
 
 .right {
@@ -61,5 +68,5 @@
 }
 
 .link:hover a {
-  color: #005fdb;
+  color: #eec5c5;
 }
