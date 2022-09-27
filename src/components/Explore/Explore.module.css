@@ -3,6 +3,8 @@
   flex-direction: column;
   gap: 30px;
   padding: 30px;
+  background: #1a202c;
+  color: aliceblue;
 }
 
 .container .header {
@@ -14,20 +16,20 @@
 
 .chip {
   border-radius: 20px;
-  color: black;
+  color: aliceblue;
   border: 1px solid gray;
   padding: 3px 8px;
   cursor: pointer;
 }
 .activeChip {
-  border: 1px solid #005fdb;
-  color: #005fdb;
+  border: 1px solid #eec5c5;
+  color: #e4b4b4;
 }
 
 .title {
   font-weight: bold;
   font-size: 1.5rem;
-  color: black;
+  color: aliceblue;
 }
 
 .body {

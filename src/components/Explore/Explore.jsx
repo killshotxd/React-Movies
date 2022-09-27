@@ -60,7 +60,9 @@ function Explore() {
   };
 
   useEffect(() => {
-    if (isNearEnd) handlePaginate();
+    if (isNearEnd) {
+      handlePaginate();
+    }
   }, [isNearEnd]);
 
   useEffect(() => {

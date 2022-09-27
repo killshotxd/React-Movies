@@ -1,5 +1,7 @@
 .container {
   padding: 30px;
+  background: #1a202c;
+  color: white;
 }
 
 .title {
