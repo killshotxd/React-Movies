@@ -60,12 +60,6 @@ function Explore() {
   };
 
   useEffect(() => {
-    if (isNearEnd) {
-      handlePaginate();
-    }
-  }, [isNearEnd]);
-
-  useEffect(() => {
     setCurrentPage(1);
     fetchMovies(1);
   }, [selectedGenres]);
@@ -73,6 +67,10 @@ function Explore() {
   useEffect(() => {
     fetchAllGenres();
   }, []);
+
+  useEffect(() => {
+    if (isNearEnd) handlePaginate();
+  }, [isNearEnd]);
 
   return (
     <div className={styles.container}>
